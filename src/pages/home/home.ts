@@ -81,7 +81,7 @@ export class HomePage {
   getRandomQuizIndex() {
     let randomIndex = -1;
     do {
-      randomIndex = Math.floor(Math.random() * 7);
+      randomIndex = Math.floor(Math.random() * 3);
     }
     while (!(this.batchQuizQuestions.indexOf(randomIndex) <= -1)) {
       return randomIndex;
