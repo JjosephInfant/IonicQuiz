@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-navbar>
+        <img src="./assets/imgs/icon-40.png" id="c2cLogo"/>
+        <ion-title  id="headerText">
+            C2C Quiz - Best Of Us
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <div *ngIf="everythingLoaded">
+
+        <ion-card *ngIf="isHome && !quizFinished" id="homeCard" class="quizQuestionCard">
+            <!-- <ion-card-header>
+                <ion-card-title>Welcome to C2C Quiz</ion-card-title>
+            </ion-card-header> -->
+            <ion-card-content>
+                <img src="./assets/imgs/Cute-Thinking-Woman-PNG.png"/>
+                <button ion-button  (click)="startQuiz()" id="startQuiz">
+                    Start
+                </button>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card *ngIf="!quizFinished && !isHome" class="quizQuestionCard" >
+            <ion-card-content id="questionContent">
+                <div id="questionText">{{currentQuestion.question}}</div>
+                <form [formGroup]="quizQuestionForm">
+                    <ion-list radio-group [(ngModel)]="currentAnswer" formControlName="listOptions">
+                        <ion-item class="quizAnswerItem">
+                            <ion-label>{{currentQuestion.option1}}</ion-label>
+                            <ion-radio value="1" checked></ion-radio>
+                        </ion-item>
+                        <ion-item class="quizAnswerItem">
+                            <ion-label>{{currentQuestion.option2}}</ion-label>
+                            <ion-radio value="2"></ion-radio>
+                        </ion-item>
+                        <ion-item class="quizAnswerItem">
+                            <ion-label>{{currentQuestion.option3}}</ion-label>
+                            <ion-radio value="3" ></ion-radio>
+                        </ion-item>
+                    </ion-list>
+                </form>
+            </ion-card-content>
+            <div id="nextQuestionContainer">
+                <button ion-button round (click)="next();" *ngIf="questionsAsked !== 4" class="answerButton" >{{nextQuestion}}</button>
+                <button ion-button round (click)="next();" *ngIf="questionsAsked === 4" class="answerButton">{{completeQuiz}}</button>
+            </div> 
+        </ion-card> 
+
+        <ion-card *ngIf="quizFinished && !isHome" class="resultCardContent" id="resultCardContentSpace">
+            <!-- <ion-card-header>
+                <ion-card-title>Total: {{correctAnswers}} correct out of {{questionsAsked}}</ion-card-title>
+            </ion-card-header> -->
+            <ion-card-content class="resultCardContent">
+                <div class="blink">You scored {{ quizResult }} %</div>
+                <img id="resultImage" *ngIf="correctAnswers === 5" src="./assets/imgs/fireworks.gif"/>
+                <img id="resultImage" *ngIf="correctAnswers === 4" src="./assets/imgs/yahoo.gif"/>
+                <img id="resultImage" *ngIf="correctAnswers < 4" src="./assets/imgs/tryAgain.gif"/>
+                <button ion-button icon-only (click)="landHome()" id="restartQuiz">
+                    <ion-icon name="refresh-circle"></ion-icon>
+                </button>
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+</ion-content>
