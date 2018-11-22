@@ -1,7 +1,3 @@
-/**
- * @author Joseph <infantjoseph@gmail.com>
- */
-
 import { Component, NgZone } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { questionJson } from '../../app/questions';
@@ -30,23 +26,19 @@ export class HomePage {
   quizQuestionForm;
   quizResult;
 
-  constructor(public navCtrl: NavController, private loadingCtrl: LoadingController, private zone : NgZone) {
+  constructor(public navCtrl: NavController, private loadingCtrl: LoadingController, private zone: NgZone) {
     this.quizQuestionForm = new FormGroup({ listOptions: new FormControl() });
     this.questions = questionJson;
     this.getQuizQuestion();
   }
 
 
-  next() {
-    if (+this.currentAnswer === this.currentQuestion.answer) {
+  next(currentAnswer : number) {
+    if (currentAnswer === this.currentQuestion.answer) {
       this.correctAnswers++;
     }
     this.questionsAsked++;
     this.getQuizQuestion();
-  }
-
-  updateAnswer(answer: number) {
-    this.currentAnswer = answer;
   }
 
   startQuiz() {
@@ -57,9 +49,6 @@ export class HomePage {
   }
 
   getQuizQuestion() {
-    this.zone.run(()=>{
-      this.quizQuestionForm.controls.listOptions.reset();
-    });
     if (this.questionsAsked === 5) {
       this.quizResult = (this.correctAnswers / this.questionsAsked) * 100;
       this.quizFinished = true;
@@ -76,12 +65,16 @@ export class HomePage {
     this.quizFinished = false;
     this.isHome = true;
     this.batchQuizQuestions = [];
+    //this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
   getRandomQuizIndex() {
     let randomIndex = -1;
+    // this.zone.run(() => {
+    //   this.quizQuestionForm.controls.listOptions.reset();
+    // });
     do {
-      randomIndex = Math.floor(Math.random() * 3);
+      randomIndex = Math.floor(Math.random() * 17);
     }
     while (!(this.batchQuizQuestions.indexOf(randomIndex) <= -1)) {
       return randomIndex;

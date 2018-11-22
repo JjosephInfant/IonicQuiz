@@ -1,52 +1,58 @@
-<ion-header>
-    <ion-navbar>
-        <img src="./assets/imgs/icon-40.png" id="c2cLogo"/>
-        <ion-title  id="headerText">
-            C2C Quiz - Best Of Us
-        </ion-title>
-    </ion-navbar>
+<ion-header id="quizHeaderContainer">
+   
+        <img src="./assets/imgs/home-logo.png" id="c2cLogo"/>
+        
 </ion-header>
 
-<ion-content padding>
+<ion-content >
 
     <div *ngIf="everythingLoaded">
 
-        <ion-card *ngIf="isHome && !quizFinished" id="homeCard" class="quizQuestionCard">
+        <ion-card *ngIf="isHome && !quizFinished" id="homeCard">
             <!-- <ion-card-header>
                 <ion-card-title>Welcome to C2C Quiz</ion-card-title>
             </ion-card-header> -->
-            <ion-card-content>
-                <img src="./assets/imgs/Cute-Thinking-Woman-PNG.png"/>
+            <ion-card-content >
+                <img src="./assets/imgs/Cute-Thinking-Woman-PNG.png" id="thinkingImg"/>
                 <button ion-button  (click)="startQuiz()" id="startQuiz">
-                    Start
+                    <img src="./assets/imgs/globes-start-button.png" />
                 </button>
             </ion-card-content>
         </ion-card>
 
-        <ion-card *ngIf="!quizFinished && !isHome" class="quizQuestionCard" >
+        <ion-card *ngIf="!quizFinished && !isHome" id="quizQuestionCard" >
             <ion-card-content id="questionContent">
                 <div id="questionText">{{currentQuestion.question}}</div>
-                <form [formGroup]="quizQuestionForm">
+                <button ion-button block (click)="next(1);" class="quizAnswerItem">
+                    <ion-label class="optionText">{{currentQuestion.option1}}</ion-label>
+                </button>
+                <button ion-button block (click)="next(2);" class="quizAnswerItem">
+                    <ion-label class="optionText">{{currentQuestion.option2}}</ion-label>
+                </button>
+                <button ion-button block (click)="next(3);" class="quizAnswerItem">
+                    <ion-label class="optionText">{{currentQuestion.option3}}</ion-label>
+                </button>
+                <!-- <form [formGroup]="quizQuestionForm">
                     <ion-list radio-group [(ngModel)]="currentAnswer" formControlName="listOptions">
-                        <ion-item class="quizAnswerItem">
-                            <ion-label>{{currentQuestion.option1}}</ion-label>
-                            <ion-radio value="1" checked></ion-radio>
+                        <ion-item class="quizAnswerItem" (click)="next();">
+                            <ion-label class="optionText">{{currentQuestion.option1}}</ion-label>
+                            <ion-radio value="1" ></ion-radio>
                         </ion-item>
-                        <ion-item class="quizAnswerItem">
-                            <ion-label>{{currentQuestion.option2}}</ion-label>
+                        <ion-item class="quizAnswerItem" (click)="next();">
+                            <ion-label class="optionText">{{currentQuestion.option2}}</ion-label>
                             <ion-radio value="2"></ion-radio>
                         </ion-item>
-                        <ion-item class="quizAnswerItem">
-                            <ion-label>{{currentQuestion.option3}}</ion-label>
+                        <ion-item class="quizAnswerItem" (click)="next();">
+                            <ion-label class="optionText">{{currentQuestion.option3}}</ion-label>
                             <ion-radio value="3" ></ion-radio>
                         </ion-item>
                     </ion-list>
-                </form>
+                </form> -->
             </ion-card-content>
-            <div id="nextQuestionContainer">
-                <button ion-button round (click)="next();" *ngIf="questionsAsked !== 4" class="answerButton" >{{nextQuestion}}</button>
-                <button ion-button round (click)="next();" *ngIf="questionsAsked === 4" class="answerButton">{{completeQuiz}}</button>
-            </div> 
+            <!-- <div id="nextQuestionContainer">
+                <button ion-button round (click)="next();" *ngIf="questionsAsked !== 4" class="answerButton optionText" >{{nextQuestion}}</button>
+                <button ion-button round (click)="next();" *ngIf="questionsAsked === 4" class="answerButton optionText">{{completeQuiz}}</button>
+            </div>  -->
         </ion-card> 
 
         <ion-card *ngIf="quizFinished && !isHome" class="resultCardContent" id="resultCardContentSpace">

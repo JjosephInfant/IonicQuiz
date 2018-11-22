@@ -75,15 +75,12 @@ var HomePage = (function () {
         this.questions = __WEBPACK_IMPORTED_MODULE_2__app_questions__["a" /* questionJson */];
         this.getQuizQuestion();
     }
-    HomePage.prototype.next = function () {
-        if (+this.currentAnswer === this.currentQuestion.answer) {
+    HomePage.prototype.next = function (currentAnswer) {
+        if (currentAnswer === this.currentQuestion.answer) {
             this.correctAnswers++;
         }
         this.questionsAsked++;
         this.getQuizQuestion();
-    };
-    HomePage.prototype.updateAnswer = function (answer) {
-        this.currentAnswer = answer;
     };
     HomePage.prototype.startQuiz = function () {
         this.questionsAsked = 0;
@@ -92,10 +89,6 @@ var HomePage = (function () {
         this.isHome = false;
     };
     HomePage.prototype.getQuizQuestion = function () {
-        var _this = this;
-        this.zone.run(function () {
-            _this.quizQuestionForm.controls.listOptions.reset();
-        });
         if (this.questionsAsked === 5) {
             this.quizResult = (this.correctAnswers / this.questionsAsked) * 100;
             this.quizFinished = true;
@@ -111,11 +104,15 @@ var HomePage = (function () {
         this.quizFinished = false;
         this.isHome = true;
         this.batchQuizQuestions = [];
+        //this.navCtrl.setRoot(this.navCtrl.getActive().component);
     };
     HomePage.prototype.getRandomQuizIndex = function () {
         var randomIndex = -1;
+        // this.zone.run(() => {
+        //   this.quizQuestionForm.controls.listOptions.reset();
+        // });
         do {
-            randomIndex = Math.floor(Math.random() * 7);
+            randomIndex = Math.floor(Math.random() * 17);
         } while (!(this.batchQuizQuestions.indexOf(randomIndex) <= -1));
         {
             return randomIndex;
@@ -125,7 +122,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/ustuser/Documents/Works/BestOfUs/Quiz/QuizWithC2C/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <img src="./assets/imgs/icon-40.png" id="c2cLogo"/>\n        <ion-title  id="headerText">\n            C2C Quiz - Best Of Us\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n    <div *ngIf="everythingLoaded">\n\n        <ion-card *ngIf="isHome && !quizFinished" id="homeCard" class="quizQuestionCard">\n            <!-- <ion-card-header>\n                <ion-card-title>Welcome to C2C Quiz</ion-card-title>\n            </ion-card-header> -->\n            <ion-card-content>\n                <img src="./assets/imgs/Cute-Thinking-Woman-PNG.png"/>\n                <button ion-button  (click)="startQuiz()" id="startQuiz">\n                    Start\n                </button>\n            </ion-card-content>\n        </ion-card>\n\n        <ion-card *ngIf="!quizFinished && !isHome" class="quizQuestionCard" >\n            <ion-card-content id="questionContent">\n                <div id="questionText">{{currentQuestion.question}}</div>\n                <form [formGroup]="quizQuestionForm">\n                    <ion-list radio-group [(ngModel)]="currentAnswer" formControlName="listOptions">\n                        <ion-item class="quizAnswerItem">\n                            <ion-label>{{currentQuestion.option1}}</ion-label>\n                            <ion-radio value="1" checked></ion-radio>\n                        </ion-item>\n                        <ion-item class="quizAnswerItem">\n                            <ion-label>{{currentQuestion.option2}}</ion-label>\n                            <ion-radio value="2"></ion-radio>\n                        </ion-item>\n                        <ion-item class="quizAnswerItem">\n                            <ion-label>{{currentQuestion.option3}}</ion-label>\n                            <ion-radio value="3" ></ion-radio>\n                        </ion-item>\n                    </ion-list>\n                </form>\n            </ion-card-content>\n            <div id="nextQuestionContainer">\n                <button ion-button round (click)="next();" *ngIf="questionsAsked !== 4" class="answerButton" >{{nextQuestion}}</button>\n                <button ion-button round (click)="next();" *ngIf="questionsAsked === 4" class="answerButton">{{completeQuiz}}</button>\n            </div> \n        </ion-card> \n\n        <ion-card *ngIf="quizFinished && !isHome" class="resultCardContent" id="resultCardContentSpace">\n            <!-- <ion-card-header>\n                <ion-card-title>Total: {{correctAnswers}} correct out of {{questionsAsked}}</ion-card-title>\n            </ion-card-header> -->\n            <ion-card-content class="resultCardContent">\n                <div class="blink">You scored {{ quizResult }} %</div>\n                <img id="resultImage" *ngIf="correctAnswers === 5" src="./assets/imgs/fireworks.gif"/>\n                <img id="resultImage" *ngIf="correctAnswers === 4" src="./assets/imgs/yahoo.gif"/>\n                <img id="resultImage" *ngIf="correctAnswers < 4" src="./assets/imgs/tryAgain.gif"/>\n                <button ion-button icon-only (click)="landHome()" id="restartQuiz">\n                    <ion-icon name="refresh-circle"></ion-icon>\n                </button>\n            </ion-card-content>\n        </ion-card>\n    </div>\n\n</ion-content>'/*ion-inline-end:"/Users/ustuser/Documents/Works/BestOfUs/Quiz/QuizWithC2C/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/ustuser/Documents/Works/BestOfUs/Quiz/QuizWithC2C/src/pages/home/home.html"*/'<ion-header id="quizHeaderContainer">\n   \n        <img src="./assets/imgs/home-logo.png" id="c2cLogo"/>\n        \n</ion-header>\n\n<ion-content >\n\n    <div *ngIf="everythingLoaded">\n\n        <ion-card *ngIf="isHome && !quizFinished" id="homeCard" class="quizQuestionCard">\n            <!-- <ion-card-header>\n                <ion-card-title>Welcome to C2C Quiz</ion-card-title>\n            </ion-card-header> -->\n            <ion-card-content >\n                <img src="./assets/imgs/Cute-Thinking-Woman-PNG.png" id="thinkingImg"/>\n                <button ion-button  (click)="startQuiz()" id="startQuiz">\n                    <img src="./assets/imgs/globes-start-button.png" />\n                </button>\n            </ion-card-content>\n        </ion-card>\n\n        <ion-card *ngIf="!quizFinished && !isHome" class="quizQuestionCard" >\n            <ion-card-content id="questionContent">\n                <div id="questionText">{{currentQuestion.question}}</div>\n                <button ion-button block (click)="next(1);" class="quizAnswerItem">\n                    <ion-label class="optionText">{{currentQuestion.option1}}</ion-label>\n                </button>\n                <button ion-button block (click)="next(2);" class="quizAnswerItem">\n                    <ion-label class="optionText">{{currentQuestion.option2}}</ion-label>\n                </button>\n                <button ion-button block (click)="next(3);" class="quizAnswerItem">\n                    <ion-label class="optionText">{{currentQuestion.option3}}</ion-label>\n                </button>\n                <!-- <form [formGroup]="quizQuestionForm">\n                    <ion-list radio-group [(ngModel)]="currentAnswer" formControlName="listOptions">\n                        <ion-item class="quizAnswerItem" (click)="next();">\n                            <ion-label class="optionText">{{currentQuestion.option1}}</ion-label>\n                            <ion-radio value="1" ></ion-radio>\n                        </ion-item>\n                        <ion-item class="quizAnswerItem" (click)="next();">\n                            <ion-label class="optionText">{{currentQuestion.option2}}</ion-label>\n                            <ion-radio value="2"></ion-radio>\n                        </ion-item>\n                        <ion-item class="quizAnswerItem" (click)="next();">\n                            <ion-label class="optionText">{{currentQuestion.option3}}</ion-label>\n                            <ion-radio value="3" ></ion-radio>\n                        </ion-item>\n                    </ion-list>\n                </form> -->\n            </ion-card-content>\n            <!-- <div id="nextQuestionContainer">\n                <button ion-button round (click)="next();" *ngIf="questionsAsked !== 4" class="answerButton optionText" >{{nextQuestion}}</button>\n                <button ion-button round (click)="next();" *ngIf="questionsAsked === 4" class="answerButton optionText">{{completeQuiz}}</button>\n            </div>  -->\n        </ion-card> \n\n        <ion-card *ngIf="quizFinished && !isHome" class="resultCardContent" id="resultCardContentSpace">\n            <!-- <ion-card-header>\n                <ion-card-title>Total: {{correctAnswers}} correct out of {{questionsAsked}}</ion-card-title>\n            </ion-card-header> -->\n            <ion-card-content class="resultCardContent">\n                <div class="blink">You scored {{ quizResult }} %</div>\n                <img id="resultImage" *ngIf="correctAnswers === 5" src="./assets/imgs/fireworks.gif"/>\n                <img id="resultImage" *ngIf="correctAnswers === 4" src="./assets/imgs/yahoo.gif"/>\n                <img id="resultImage" *ngIf="correctAnswers < 4" src="./assets/imgs/tryAgain.gif"/>\n                <button ion-button icon-only (click)="landHome()" id="restartQuiz">\n                    <ion-icon name="refresh-circle"></ion-icon>\n                </button>\n            </ion-card-content>\n        </ion-card>\n    </div>\n\n</ion-content>'/*ion-inline-end:"/Users/ustuser/Documents/Works/BestOfUs/Quiz/QuizWithC2C/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* NgZone */]])
 ], HomePage);
@@ -259,14 +256,24 @@ MyApp = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return questionJson; });
 var questionJson = [
-    { "question": "Which one of the Application developed by team C2C is to manage projects ?", "option1": "ScriptTracker", "option2": "HitList", "option3": "RollCall", "answer": 2 },
-    { "question": "Which cloud computing platform is used by team C2C to deploy the Applications  ? ", "option1": "Amazon Web Services", "option2": "Microsoft Azure", "option3": "IBM Cloud", "answer": 1 },
+    { "question": "Which one of the Application developed by C2C team is to manage projects ?", "option1": "ScriptTracker", "option2": "HitList", "option3": "RollCall", "answer": 1 },
+    { "question": "Which cloud computing platform is used by C2C team to deploy the Applications ? ", "option1": "Amazon Web Services", "option2": "Microsoft Azure", "option3": "IBM Cloud", "answer": 1 },
     { "question": "Academy Award for Best Picture for the year 2018 was awarded to  ? ", "option1": "The Shape of Water", "option2": "Darkest Hour", "option3": "Dunkirk", "answer": 1 },
     { "question": "Which one of the below is not a Fantasic Four series movie ? ", "option1": "The Fantastic Four", "option2": "Fantastic Four: Prisoner of Azkaban", "option3": "Fantastic Four: Rise of the Silver Surfer", "answer": 2 },
     { "question": "Number of Harry Potter movies series released so far are ? ", "option1": "6", "option2": "7", "option3": "8", "answer": 3 },
     { "question": "Which one of this movie is not produced by universal pictures ? ", "option1": "Fifty Shades of Grey", "option2": "Wonder Woman", "option3": "Fast & Furious", "answer": 2 },
     { "question": "What is the name of role played by Emma Watson in Harry Potter series? ", "option1": "Hermione Granger", "option2": "Ginny Weasley", "option3": "Hannah Abbott", "answer": 1 },
-    { "question": "Who played the leading role in the movie Iron man ?", "option1": "Terrence Howard", "option2": "Robert Downey Jr.", "option3": "Jeff Bridges", "answer": 2 }
+    { "question": "Who played the leading role in the movie Iron man ?", "option1": "Terrence Howard", "option2": "Robert Downey Jr.", "option3": "Jeff Bridges", "answer": 2 },
+    { "question": "Which type of delivery model is being is used in C2C product suite ?", "option1": "SAAS", "option2": "IAAS", "option3": "DAAS", "answer": 1 },
+    { "question": "How scripts are Annotated ?", "option1": "Using Mobile App", "option2": "Using Roll Call Application", "option3": "Using DealPoint Application", "answer": 1 },
+    { "question": "What is the development Methodology used across C2C ?", "option1": "Kanban", "option2": "Scrum", "option3": "Waterfall", "answer": 2 },
+    { "question": "Which development tool is used for UI development across C2C ?", "option1": "ASP.NET", "option2": "Python", "option3": "Angular JS", "answer": 3 },
+    { "question": "Which is not a product in C2C product suite ?", "option1": "Script Tracker", "option2": "DealPoint", "option3": "Jira", "answer": 3 },
+    { "question": "Which is the Domain C2C Concentrating on ?", "option1": "Healthcare", "option2": "Retail", "option3": "Media and Entertainment", "answer": 3 },
+    { "question": "Which is the product in C2C Product suite that deals with Budgeting ?", "option1": "Script Tracker", "option2": "Focus", "option3": "Mobile App", "answer": 2 },
+    { "question": "Which is the Build Automation Tool used in C2C ?", "option1": "Jenkin", "option2": "Feature Casting", "option3": "Jira", "answer": 1 },
+    { "question": "Where is uploaded scripts maintained in Script Tracker Application ?", "option1": "Watchdox", "option2": "Confluence", "option3": "Alfresco", "answer": 3 },
+    { "question": "Contract for Below the Line Performers are managed by which product ?", "option1": "RollCall", "option2": "Feature Casting", "option3": "DealPoint", "answer": 2 }
 ];
 //# sourceMappingURL=questions.js.map
 

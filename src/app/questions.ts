@@ -1,11 +1,20 @@
-/**
- * @author Joseph <infantjoseph@gmail.com>
- */
-
 export let questionJson = [
-{ "question": "Academy Award for Best Picture for the year 2018 was awarded to  ? ","option1": "The Shape of Water", "option2": "Darkest Hour", "option3": "Dunkirk", "answer": 1 }, 
-    { "question": "Which one of the below is not a Fantasic Four series movie ? ","option1": "The Fantastic Four", "option2": "Fantastic Four: Prisoner of Azkaban", "option3": "Fantastic Four: Rise of the Silver Surfer", "answer": 2 }, 
-    { "question": "Number of Harry Potter movies series released so far are ? ","option1": "6", "option2": "7", "option3": "8", "answer": 3 }, 
-    { "question": "Which one of this movie is not produced by universal pictures ? ","option1": "Fifty Shades of Grey", "option2": "Wonder Woman", "option3": "Fast & Furious", "answer": 2 }, 
-    { "question": "What is the name of role played by Emma Watson in Harry Potter series? ","option1": "Hermione Granger", "option2": "Ginny Weasley", "option3": "Hannah Abbott", "answer": 1 }, 
-    { "question": "Who played the leading role in the movie Iron man ?", "option1": "Terrence Howard", "option2": "Robert Downey Jr.", "option3": "Jeff Bridges", "answer": 2 }];
+    { "question": "Which one of the Application developed by C2C team is to manage projects ?", "option1": "ScriptTracker", "option2": "HitList", "option3": "RollCall", "answer": 1 },
+    { "question": "Which cloud computing platform is used by C2C team to deploy the Applications ? ", "option1": "Amazon Web Services", "option2": "Microsoft Azure", "option3": "IBM Cloud", "answer": 1 },
+    { "question": "Academy Award for Best Picture for the year 2018 was awarded to  ? ", "option1": "The Shape of Water", "option2": "Darkest Hour", "option3": "Dunkirk", "answer": 1 },
+    { "question": "Which one of the below is not a Fantasic Four series movie ? ", "option1": "The Fantastic Four", "option2": "Fantastic Four: Prisoner of Azkaban", "option3": "Fantastic Four: Rise of the Silver Surfer", "answer": 2 },
+    { "question": "Number of Harry Potter movies series released so far are ? ", "option1": "6", "option2": "7", "option3": "8", "answer": 3 },
+    { "question": "Which one of this movie is not produced by universal pictures ? ", "option1": "Fifty Shades of Grey", "option2": "Wonder Woman", "option3": "Fast & Furious", "answer": 2 },
+    { "question": "What is the name of role played by Emma Watson in Harry Potter series? ", "option1": "Hermione Granger", "option2": "Ginny Weasley", "option3": "Hannah Abbott", "answer": 1 },
+    { "question": "Who played the leading role in the movie Iron man ?", "option1": "Terrence Howard", "option2": "Robert Downey Jr.", "option3": "Jeff Bridges", "answer": 2 },
+    { "question": "Which type of delivery model is being is used in C2C product suite ?", "option1": "SAAS", "option2": "IAAS", "option3": "DAAS", "answer": 1 },
+    { "question": "How scripts are Annotated ?", "option1": "Using Mobile App", "option2": "Using Roll Call Application", "option3": "Using DealPoint Application", "answer": 1 },
+    { "question": "What is the development Methodology used across C2C ?", "option1": "Kanban", "option2": "Scrum", "option3": "Waterfall", "answer": 2 },
+    { "question": "Which development tool is used for UI development across C2C ?", "option1": "ASP.NET", "option2": "Python", "option3": "Angular JS", "answer": 3 },
+    { "question": "Which is not a product in C2C product suite ?", "option1": "Script Tracker", "option2": "DealPoint", "option3": "Jira", "answer": 3 },
+    { "question": "Which is the Domain C2C Concentrating on ?", "option1": "Healthcare", "option2": "Retail", "option3": "Media and Entertainment", "answer": 3 },
+    { "question": "Which is the product in C2C Product suite that deals with Budgeting ?", "option1": "Script Tracker", "option2": "Focus", "option3": "Mobile App", "answer": 2 },
+    { "question": "Which is the Build Automation Tool used in C2C ?", "option1": "Jenkin", "option2": "Feature Casting", "option3": "Jira", "answer": 1 },
+    { "question": "Where is uploaded scripts maintained in Script Tracker Application ?", "option1": "Watchdox", "option2": "Confluence", "option3": "Alfresco", "answer": 3 },
+    { "question": "Contract for Below the Line Performers are managed by which product ?", "option1": "RollCall", "option2": "Feature Casting", "option3": "DealPoint", "answer": 2 }
+];
